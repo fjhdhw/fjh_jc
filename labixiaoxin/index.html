@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	 <meta content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" name="viewport">
+	<title>蜡笔小新修眉毛</title>
+	<link rel="stylesheet" href="../css/base/base.css">
+	<link rel="stylesheet" href="../css/base/jquery.mobile.custom.theme.min.css">
+	<link rel="stylesheet" href="../css/base/jquery.mobile.custom.structure.min.css">
+	<link rel="stylesheet" href="../css/default/labixiaoxin.css">
+	<script src="../js/lib/jquery.js"></script>
+	<script src="../js/lib/jquery.mobile.min.js"></script>
+</head>
+
+<body>
+
+<!-- page1 -->
+<div data-role="page" id="one" class="role">
+	
+	<div class="role-bg">
+		<img src="../image/labixiaoxin/page1Bg.jpg" />
+		<div class="biling"></div>
+		<div class="slide-title"></div>
+		<div class="play"></div>
+		<div class="pencle"></div>
+	</div>	
+</div>
+<!-- /page1 -->
+
+<!-- page2 -->
+<div data-role="page" id="two">
+	<div class="role-bg">
+		<img src="../image/labixiaoxin/page2Bg.jpg" />
+		<div class="game-des"><div class="game-des-line"></div></div>		
+		<a href="#three"><div class="know"></div></a>
+	</div>
+</div>
+<!-- /page2 -->
+
+<!-- page3 -->
+<div data-role="page" id="three" style="background:#000;" class="addw">
+	<div class="role-bg">
+		<img id="page3Bg" class="page3Animate" src="../image/labixiaoxin/page3Bg.png" />
+		<img id="xiaoxin" class="page3Animate" src="../image/labixiaoxin/xiaoxinclose.png" />
+		<img id="gameBg" src="../image/labixiaoxin/gameBg.jpg" />
+		<div class="ready"></div>
+		<div class="go"></div>
+		<div class="clickBar">
+			<img id="clickBtn" src="../image/labixiaoxin/clickBtn.png" />
+		</div>
+	</div>
+</div>
+<!-- /page3 -->
+
+<!-- page4 -->
+<div data-role="page" id="success">
+	<div class="role-bg">		
+		<img src="../image/labixiaoxin/success.jpg" />
+		<div id="successnext" class="successnext"></div>
+	</div>
+</div>
+<!-- /page4 -->
+
+<!-- page5 -->
+<div data-role="page" id="error">
+	<div class="role-bg">		
+		<img src="../image/labixiaoxin/error.jpg" />
+		<div id="retry" class="retry"></div>
+	</div>
+</div>
+<!-- /page5 -->
+
+
+<script type="text/javascript">
+$(function() {
+  var _w = $("html").width();
+
+  function state1() {
+    $(".slide-title").removeClass("rotate2");
+    $(".slide-title").addClass("rotate1");
+    setTimeout(state2, 90);
+  }
+
+  function state2() {
+    $(".slide-title").removeClass("rotate1");
+    $(".slide-title").addClass("rotate2");
+    setTimeout(state1, 90);
+  }
+
+  function state3() {
+    $(".pencle").removeClass("rotate2");
+    $(".pencle").addClass("rotate1");
+    setTimeout(state4, 90);
+  }
+
+  function state4() {
+    $(".pencle").removeClass("rotate1");
+    $(".pencle").addClass("rotate2");
+    setTimeout(state3, 90);
+  }
+  //标题移动并抖动
+  if (_w >= 320 && _w < 480) {
+    $(".slide-title").animate({
+        left: 5,
+        top: 145
+      },
+      1000, function() {
+        state1();
+      });
+  } else if (_w >= 480 && _w < 640) {
+    $(".slide-title").animate({
+        left: 7.5,
+        top: 220
+      },
+      1000, function() {
+        state1();
+      });
+  } else if (_w >= 640) {
+    $(".slide-title").animate({
+        left: 10,
+        top: 290
+      },
+      1000, function() {
+        state1();
+      });
+  }
+  //点击触发铅笔时间
+  $(".play").click(function() {
+    $(".pencle").fadeIn('fast', function() {
+      state3();
+      setTimeout(function() {
+        window.location.href = "#two";
+      }, 1000);
+    });
+  });
+
+  //画面二加载完成之后
+  $(document).on("pageshow", "#two", function() {
+  	//出现线条
+    if (_w >= 320 && _w < 480) {
+      $(".game-des-line").animate({
+           width: 120
+        },
+        1000, function() {
+
+        });
+    } else if (_w >= 480 && _w < 640) {
+      $(".game-des-line").animate({
+           width: 180
+        },
+        1000, function() {
+        });
+    } else if (_w >= 640) {
+      $(".game-des-line").animate({
+          width: 240
+        },
+        1000, function() {});
+    }
+  });
+
+  //画面三加载完成之后
+  $(document).on("pageshow", "#three", function() {
+  	$("#clickBtn").unbind("touchstart");
+  	$("#clickBtn").unbind("touchend");
+    //先进行眨眼的效果
+    var zyInteval = setInterval(function(argument) {
+      if ($("#xiaoxin").attr("src").indexOf("xiaoxinclose") != -1) {
+        $("#xiaoxin").attr("src", "../image/labixiaoxin/xiaoxin.png");
+      } else {
+        $("#xiaoxin").attr("src", "../image/labixiaoxin/xiaoxinclose.png");
+      }
+    }, 100);
+
+    function scrollClickBtn() {
+    	//按钮左右不停滚动
+    	var _c_btn_w = $("#clickBtn").width();
+    	var _c_bar_w = $(".clickBar").width();
+    	var _c_btn_l = $("#clickBtn").offset().left;//获取左边的定位
+    	var _c_scroll_w = _c_bar_w - _c_btn_w;//可以滚动的位置
+    	var _speed = 1000;
+    	if(_c_btn_l==0){
+    		$("#clickBtn").animate({
+    			"marginLeft": _c_scroll_w},
+    			_speed, function() {
+    			scrollClickBtn();
+    		});
+    	}else if(_c_btn_l==_c_scroll_w){
+    		$("#clickBtn").animate({
+    			"marginLeft": 0},
+    			_speed, function() {
+    			scrollClickBtn();
+    		});
+    	}
+    }
+
+
+    //眨眼后触发事件
+    setTimeout(function() {
+      //清除眨眼效果
+      clearInterval(zyInteval);
+      //开始动画,ready和go的切换
+      $(".ready").animate({
+          "opacity": 0
+        },
+        1000, function() {
+          $(".go").animate({
+              "opacity": 1
+            },
+            1000, function() {
+              //小新和背景模糊放大
+              $("#page3Bg").addClass('page3StartAnimate');
+              $("#xiaoxin").addClass('page3StartAnimate');
+              $(".go").animate({
+                  "opacity": 0
+                },
+                2000, function() {
+                  $("#page3Bg").animate({
+                      "opacity": 0
+                    },
+                    300, function() {
+                      /* stuff to do after animation is complete */
+                    });
+                  $("#xiaoxin").animate({
+                      "opacity": 0
+                    },
+                    300, function() {
+                      /* stuff to do after animation is complete */
+                    });
+                  $("#gameBg").animate({
+                      "opacity": 1
+                    },
+                    300, function() {
+                      //出现眉毛，下方开始移动
+                      
+                      //移动事件
+                      scrollClickBtn();
+
+                      //绑定点击事件
+					  $("#clickBtn").bind("touchstart",function(e) {
+					    window.location.href="#success";
+					  });
+
+					  $("#clickBtn").bind("touchend",function(e) {
+					    e.preventdefault();
+					  });
+                    });
+                });
+            });
+        });
+    }, 600);
+
+
+	
+
+  });
+
+  //retry按钮
+  $("#retry").click(function(event) {
+  	window.location.href="#three";
+  });
+
+  //成功后next按钮
+  $("#successnext").click(function(event) {
+  	window.location.href="#three";
+  });
+});
+</script>
+
+</body>
+</html>

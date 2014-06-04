@@ -8,7 +8,7 @@ a{display: block;}
 .ui-mobile .ui-page-active {
 display: block;
 overflow: visible;
-overflow: hidden;
+overflow-x: hidden;
 }
 
 .role-bg .biling{background: url(../../image/labixiaoxin/biling.png);position: absolute;z-index: 20;}
@@ -60,7 +60,7 @@ overflow: hidden;
 
 @media screen and (min-width:320px){
 	.role-bg .biling{background-size: 75px;width: 75px;height: 41px;top:180px;left:212px;}
-	.role-bg .slide-title{background-size: 225px;width: 225px;height:60px;top:40px;left:-245px;}
+	.role-bg .slide-title{background-size: 225px;width: 225px;height:60px;top:120px;left:-245px;}
 	.role-bg .play,.role-bg .play:active{background-size: 162px;width: 162px;height: 108px;top:360px;left:10px;}
 	.role-bg .pencle{background-size: 44px;width: 44px;height: 288px;top:170px;left:15px;}
 	.role-bg .game-des{background-size: 213px;width: 213px;height: 143px;top:255px;margin-left: -106px;}
@@ -78,6 +78,28 @@ overflow: hidden;
 	.role-bg .game-tv{background-size: 207px;width: 207px;height:127px;top:110px;right: 10px;}
 	.role-bg .game-tv img{width: 80px;height: 34px;right: 17px;bottom: 20px;}
 }
+
+@media screen and (min-width:360px){
+	.role-bg .biling{background-size: 84px;width: 84px;height: 41px;top:46px;left:238px;}
+	.role-bg .slide-title{background-size: 253px;width: 253px;height:67px;top:145px;left:-275px;}
+	.role-bg .play,.role-bg .play:active{background-size: 182px;width: 182px;height: 121px;top:405px;left:11px;}
+	.role-bg .pencle{background-size: 49px;width: 49px;height: 324px;top:191px;left:15px;}
+	.role-bg .game-des{background-size: 240px;width: 240px;height: 161px;top:286px;margin-left: -119px;}
+	.role-bg .game-des-line{height: 2px;top:34px;}
+	.role-bg .know,.role-bg .know:active{background-size: 154px;width: 154px;height: 98px;top:438px;margin-left: -88px;}
+	#xiaoxin{width:201px;margin-left: -153px;margin-top:-56px;}
+	.role-bg .clickBar{background-size: 360px;width: 360px;height: 117px;}
+	.role-bg .clickBar img{margin-top: 3px;width: 110px;}
+	.role-bg .ready{background-size: 345px;width: 345px;height: 76px;margin-left: -172px;margin-top: -38px;}
+	.role-bg .go{background-size: 343px;width: 343px;height: 124px;margin-left: -171px;margin-top: -62px;}
+	.role-bg .retry,.role-bg .retry:active{background-size:210px;width: 210px;height: 128px;margin-left: -104px;top:445px;}
+	.role-bg .successnext,.role-bg .successnext:active{background-size:202px;width: 202px;height: 139px;margin-left: -101px;top:421px;}
+	#eyebrow{width: 348px;height: 170px;top:17px;}
+	#eyebrowj{width: 250px;height: 302px;right: 0px;top: 45px;}
+	.role-bg .game-tv{background-size: 232px;width: 232px;height:142px;top:123px;right: 11px;}
+	.role-bg .game-tv img{width: 90px;height: 38px;right: 19px;bottom: 22px;}
+}
+
 @media screen and (min-width:480px){
 	.role-bg .biling{background-size: 113px;width: 113px;height: 61px;top:260px;left:308px;}
 	.role-bg .slide-title{background-size: 337px;width: 337px;height:90px;top:200px;left:-345px;}
@@ -132,6 +154,25 @@ overflow: hidden;
 		opacity:0;     
 	}
 }
+/*一些动画*/
+@-webkit-keyframes ltr{ 
+	0%{
+	    left:0px;
+	    top:0px;
+	}
+	50%{
+	    left:60px;
+	    top:10px;
+	}
+	100%{
+		left:0px;
+		top:0px;
+	}
+}
+.role-bg .ltr_j{
+    -webkit-animation: ltr 3s infinite ease-in-out;
+}
+
 .role-bg .biling{
     -webkit-animation: twinkling 1s infinite ease-in-out;
 }

@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	 <meta content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" name="viewport">
+	<title>蜡笔小新修眉毛</title>
+	<link rel="stylesheet" href="../css/base/base.css">
+	<link rel="stylesheet" href="../css/base/jquery.mobile.custom.theme.min.css">
+	<link rel="stylesheet" href="../css/base/jquery.mobile.custom.structure.min.css">
+	<link rel="stylesheet" href="../css/default/labixiaoxin.css">
+	<script src="../js/lib/jquery.js"></script>
+	<script src="../js/lib/jquery.mobile.min.js"></script>
+  <script src="../js/ui/adaptUILayout.min.js"></script>
+  <style type="text/css">
+  .ui-mobile .ui-page-active {
+    overflow: hidden;
+  }
+  </style>
+
+</head>
+
+<body>
+
+<!-- page3 -->
+	<div class="role-bg">
+		<img id="page3Bg" class="" style="width:200%;" src="../image/labixiaoxin/page3Bg.jpg" />
+		<img id="xiaoxin" class="" src="../image/labixiaoxin/xiaoxinclose.png" />
+		<img id="gameBg" src="../image/labixiaoxin/gameBg.jpg" />
+		<div class="ready"></div>
+		<div class="go"></div>
+		<div class="clickBar">
+			<img id="clickBtn" src="../image/labixiaoxin/clickBtn.png" />
+		</div>
+    <div id="eyebrow">
+      <img src="../image/labixiaoxin/eyebrow1.png" />
+      <img src="../image/labixiaoxin/eyebrow2.png" style="display:none;" />
+      <img src="../image/labixiaoxin/eyebrow3.png" style="display:none;" />
+    </div>
+    <div id="eyebrowj">
+      <img src="../image/labixiaoxin/eyebrowj1.png" />
+    </div>
+	</div>
+
+  <script type="text/javascript">
+  var successT;
+  var _w = $("html").width();
+    //画面三加载完成之后
+  $(function(){
+    $("#eyebrow").css("display","none");
+    $("#eyebrowj").css("display","none");
+    $("gameBg").css("opacity","0");
+    var isPlay = true;//能否玩游戏
+    $("#clickBtn").unbind("touchstart");
+    $("#clickBtn").unbind("touchend");
+
+    //图片渐渐缩放
+    $("#page3Bg").animate({
+      "width": "150%"},
+      1000, function() {
+        $(this).addClass('page3Animate');
+    });
+
+    //小新移动
+    if (_w >= 320 && _w < 480) {
+      $("#xiaoxin").animate({
+        "marginTop": -100},
+        1000, function() {
+          $(this).addClass('page3Animate');
+      });
+    } else if (_w >= 480 && _w < 640) {
+      $("#xiaoxin").animate({
+        "marginTop": -150},
+        1000, function() {
+          $(this).addClass('page3Animate');
+      });
+    } else if (_w >= 640) {
+      $("#xiaoxin").animate({
+        "marginTop": -200},
+        1000, function() {
+          $(this).addClass('page3Animate');          
+      });
+    }
+    
+    //先进行眨眼的效果
+    var zyInteval = setInterval(function(argument) {
+      if ($("#xiaoxin").attr("src").indexOf("xiaoxinclose") != -1) {
+        $("#xiaoxin").attr("src", "../image/labixiaoxin/xiaoxin.png");
+      } else {
+        $("#xiaoxin").attr("src", "../image/labixiaoxin/xiaoxinclose.png");
+      }
+    }, 100);
+
+    function scrollClickBtn() {
+      //按钮左右不停滚动
+      var _c_btn_w = $("#clickBtn").width();
+      var _c_bar_w = $(".clickBar").width();
+      var _c_btn_l = $("#clickBtn").offset().left;//获取左边的定位
+      var _c_scroll_w = _c_bar_w - _c_btn_w;//可以滚动的位置
+      var _speed = 1000;
+      if(_c_btn_l==0){
+        $("#clickBtn").animate({
+          "marginLeft": _c_scroll_w},
+          _speed, function() {
+          scrollClickBtn();
+        });
+      }else if(_c_btn_l==_c_scroll_w){
+        $("#clickBtn").animate({
+          "marginLeft": 0},
+          _speed, function() {
+          scrollClickBtn();
+        });
+      }
+    }
+
+
+    //眨眼后触发事件
+    setTimeout(function() {
+      //清除眨眼效果
+      clearInterval(zyInteval);
+      //开始动画,ready和go的切换
+      $(".ready").animate({
+        "opacity": 1
+      },1000,function(){
+        $(".ready").animate({
+          "opacity": 0
+        },
+        1000, function() {
+          $(".go").animate({
+              "opacity": 1
+            },
+            1000, function() {
+              //小新和背景模糊放大
+              $("#page3Bg").addClass('page3StartAnimate');
+              $("#xiaoxin").addClass('page3StartAnimate');
+              $(".go").animate({
+                  "opacity": 0
+                },
+                300, function() {
+                  $("#page3Bg").animate({
+                      "opacity": 0
+                    },
+                    300, function() {
+                      /* stuff to do after animation is complete */
+                    });
+                  $("#xiaoxin").animate({
+                      "opacity": 0
+                    },
+                    300, function() {
+                      /* stuff to do after animation is complete */
+                    });
+                  $("#gameBg").animate({
+                      "opacity": 1
+                    },
+                    300, function() {
+                      //先清除计数器
+                      clearInterval(successT);
+                      //出现眉毛，下方开始移动
+                      $("#eyebrow").css("display","block");
+                      $("#eyebrowj").css("display","block");
+                      $("#eyebrowj img").addClass('ltr_j');
+                      //移动事件
+                      scrollClickBtn();
+
+                      $("#gameBg").height($("html").height());
+                      $("#gameBg").width($("html").width());
+
+                      successT = setInterval(function(){
+                        isPlay = false;
+                        window.location.href="pageerror.html";
+                      },10000);
+
+                      //定义点击次数
+                      var click_count = 0;
+
+                      //绑定点击事件
+                      $("#clickBtn").bind("touchstart",function(e) {
+                        if(isPlay){
+                          click_count++;
+                          //点击次数30次满了，跳到成功页面
+                          if(click_count==30){
+                            window.location.href="pagesuccess.html";
+                          }
+                          //判断如果计数器到10了，或者20，切换眉毛
+                          if(click_count==10){
+                            $("#eyebrow img").eq(0).css("display","none");
+                            $("#eyebrow img").eq(1).css("display","block");
+                          }else if(click_count==20){
+                            $("#eyebrow img").eq(1).css("display","none");
+                            $("#eyebrow img").eq(2).css("display","block");
+                          }
+                          //眉毛随机飘出
+                          flyeyebrow(click_count);
+                        }else{
+                          return false;
+                        }
+                      });
+
+                      $("#clickBtn").bind("touchend",function(e) {
+                        if(isPlay){
+                          $("#eyebrowj img").attr("src","../image/labixiaoxin/eyebrowj1.png");
+                        }else{
+                          return false;
+                        }
+                      });
+
+                      //随机飞眉毛
+                      function flyeyebrow(click_count) {
+                        //夹子动一下
+                        eyebrowj1();
+                        //产生随机数1,2,3
+                        var _eye_random = Math.floor(Math.random()*3+1);
+                        //产生飞的随机数1,2,3,4
+                        var _eye_fly = Math.floor(Math.random()*4+1);
+                        //随机定位
+                        var _l = Math.floor(Math.random()*50+1);
+                        $("#eyebrow").append("<div class='flybrow' id='flybrow"+click_count+"' style='left:"+(_l+40)+"%;'><img src='../image/labixiaoxin/flybrow"+_eye_random+".png' /></div>");
+                        if(_eye_fly==1){
+                          //右上飞
+                          $("#flybrow"+click_count+"").animate({
+                            "right": -1000,
+                            "top": -500},
+                            1000, function() {
+                              $(this).remove();
+                          });
+                        }else if(_eye_fly==2){
+                          //左上飞
+                          $("#flybrow"+click_count+"").animate({
+                            "left": -1000,
+                            "top": -500},
+                            1000, function() {
+                              $(this).remove();
+                          });
+                        }else if(_eye_fly==3){
+                          //左下飞
+                          $("#flybrow"+click_count+"").animate({
+                            "left": -1000,
+                            "bottom": 0},
+                            1000, function() {
+                              $(this).remove();
+                          });                          
+                        }else if(_eye_fly==4){
+                          //右下飞
+                          $("#flybrow"+click_count+"").animate({
+                            "right": -600,
+                            "bottom":-200},
+                            1000, function() {
+                              $(this).remove();
+                          });
+                        }
+                      }
+                      function eyebrowj1(click_count) {
+                        $("#eyebrowj img").attr("src","../image/labixiaoxin/eyebrowj2.png");
+                      }
+                    });
+                });
+            });
+        });
+      });
+    }, 600);
+  });
+  </script>
+<!-- /page3 -->
+
+
+
+</body>
+</html>

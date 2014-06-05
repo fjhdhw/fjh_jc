@@ -23,6 +23,7 @@
 	<div class="role-bg">		
 		<img src="../image/labixiaoxin/success.jpg" />
 		<div id="successnext" class="successnext"></div>
+		<div id="successretry" class="successretry"></div>
 	</div>
 </div>
 <!-- /page4 -->
@@ -32,13 +33,14 @@
 <script type="text/javascript">
 $(function() {
  
-  //成功页面加载完成之后
-  $(document).on("pageinit", "#success", function() {
-    clearInterval(successT);
-    //成功后next按钮
-    $("#successnext").click(function(event) {
-      window.location.reload(true);
-    });
+  //成功后next按钮
+  $("#successnext").click(function(event) {
+    window.location.reload();
+  });
+
+  //成功后next按钮
+  $("#successretry").click(function(event) {
+    window.location.href="page3.html";
   });
 
 });

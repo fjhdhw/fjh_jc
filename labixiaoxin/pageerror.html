@@ -18,12 +18,13 @@
 <body>
 
 <!-- page5 -->
+<div data-role="page" id="error" data-dom-cache＝"false">
 	<div class="role-bg">		
 		<img src="../image/labixiaoxin/error.jpg" />
 		<img id="three" src="../image/labixiaoxin/lineThree.png" />
-		<div id="retry" class="retry"></div>
-		<div class="five_points"></div>
+		<a href="page3.html "/><div id="retry" class="retry"></div></a>
 	</div>
+</div>
 <!-- /page5 -->
 
 <script type="text/javascript">
@@ -31,14 +32,9 @@
 		$("#three").animate({
 			"top": 0
 			},
-			1000, function() {			
+			1000, function() {
+			
 		});
-
-		setTimeout(function(){
-			$("#retry").click(function(event) {
-				window.location.href = "page3.html";
-			});
-		},2000);
 	})
 </script>
 

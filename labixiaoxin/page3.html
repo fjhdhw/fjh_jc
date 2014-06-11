@@ -122,15 +122,15 @@
       //开始动画,ready和go的切换
       $(".ready").animate({
         "opacity": 1
-      },500,function(){
+      },1000,function(){
         $(".ready").animate({
           "opacity": 0
         },
-        500, function() {
+        1000, function() {
           $(".go").animate({
               "opacity": 1
             },
-            500, function() {
+            1000, function() {
               //小新和背景模糊放大
               $("#page3Bg").addClass('page3StartAnimate');
               $("#xiaoxin").addClass('page3StartAnimate');

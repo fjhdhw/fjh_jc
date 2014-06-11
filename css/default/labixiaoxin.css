@@ -37,6 +37,7 @@ overflow-x: hidden;
 
 .role-bg .game-tv{background: url(../../image/labixiaoxin/tv.png);position: absolute;z-index: 24;display: none;}
 .role-bg .game-tv img{position: absolute;left:auto;top:auto;}
+.role-bg .five_points{background: url(../../image/labixiaoxin/500.png);position: absolute;z-index: 1001;}
 
 #eyebrow{position: absolute;z-index: 99;display: none;}
 #eyebrowj{position: absolute;z-index: 99;display: none;}
@@ -81,6 +82,7 @@ overflow-x: hidden;
 	.role-bg .game-tv{background-size: 207px;width: 207px;height:127px;top:90px;right: 10px;}
 	.role-bg .game-tv img{width: 80px;height: 34px;right: 17px;bottom: 20px;}
 	#three{top:-145px;}
+	.role-bg .five_points{background-size: 135px;width: 135px;height: 41px;top:20px;left: 20px;}
 }
 
 @media screen and (min-width:360px){
@@ -104,6 +106,7 @@ overflow-x: hidden;
 	.role-bg .game-tv{background-size: 232px;width: 232px;height:142px;top:123px;right: 11px;}
 	.role-bg .game-tv img{width: 90px;height: 38px;right: 19px;bottom: 22px;}
 	#three{top:-163px;}
+	.role-bg .five_points{background-size: 151px;width: 151px;height: 46px;top:22px;left: 22px;}
 }
 
 @media screen and (min-width:480px){
@@ -127,6 +130,7 @@ overflow-x: hidden;
 	.role-bg .game-tv{background-size: 310px;width: 310px;height:190px;top:165px;right: 10px;}
 	.role-bg .game-tv img{width: 120px;height: 51px;}
 	#three{top:-217px;}
+	.role-bg .five_points{background-size: 202px;width: 202px;height: 62px;top:30px;left: 30px;}
 }
 @media screen and (min-width:640px){
 	.role-bg .biling{background-size: 151px;width: 151px;height: 82px;top:340px;left:400px;}
@@ -149,6 +153,7 @@ overflow-x: hidden;
 	.role-bg .game-tv{background-size: 414px;width: 414px;height:254px;top:220px;right: 10px;}
 	.role-bg .game-tv img{width: 160px;height: 69px;}
 	#three{top:-290px;}
+	.role-bg .five_points{background-size: 271px;width: 271px;height: 83px;top:40px;left: 40px;}
 }
 
 

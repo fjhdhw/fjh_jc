@@ -19,11 +19,13 @@
 
 
 <!-- page4 -->
+<div data-role="page" id="success" data-dom-cache＝"false">
 	<div class="role-bg">		
 		<img src="../image/labixiaoxin/success.jpg" />
 		<div id="successnext" class="successnext"></div>
 		<div id="successretry" class="successretry"></div>
 	</div>
+</div>
 <!-- /page4 -->
 
 
@@ -40,16 +42,6 @@ $(function() {
   $("#successretry").click(function(event) {
     window.location.href="page3.html";
   });
-
-  //背景图片切换
-  var changeBg = setInterval(function(argument) {
-      if ($(".role-bg").find('img').attr("src").indexOf("success2") != -1) {
-        $(".role-bg").find('img').attr("src", "../image/labixiaoxin/success.jpg");
-      } else {
-        $(".role-bg").find('img').attr("src", "../image/labixiaoxin/success2.jpg");
-      }
-    }, 300);
-
 
 });
 </script>
